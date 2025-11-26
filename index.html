@@ -1,0 +1,2104 @@
+Home Tab
+Home
+
+ficheimmo
+
+right arrow
+Buy Credits
+
+
+User Avatar
+Voici mon code d'application, corrige et développe la :
+
+<!DOCTYPE html>
+
+<html lang="fr">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Fiche Découverte Vendeur – Déclic Immo</title>
+
+<!-- FONT – Apple style -->
+
+<link href="htt...ap" rel="stylesheet">
+
+<style>
+
+/* =========================================================
+
+APPLE VISION PRO – STYLE GLOBAL (verre dépoli léger)
+
+========================================================== */
+
+:root {
+
+--bg-light: rgba(255, 255, 255, 0.60);
+
+--bg-dark: rgba(40, 40, 40, 0.55);
+
+--blur: blur(18px);
+
+--border-light: rgba(255, 255, 255, 0.35);
+
+--border-dark: rgba(255, 255, 255, 0.08);
+
+--shadow: 0 8px 28px rgba(0,0,0,0.12);
+
+--radius: 18px;
+
+--blue-apple: #0a5cff;
+
+--blue-light: #70a1ff;
+
+--text-dark: #222;
+
+--text-light: #f4f4f4;
+
+}
+
+* {
+
+margin: 0;
+
+padding: 0;
+
+box-sizing: border-box;
+
+font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+
+}
+
+body {
+
+background: linear-gradient(135deg, #f1f3f7, #e5e8ee);
+
+color: var(--text-dark);
+
+padding-bottom: 50px;
+
+}
+
+body.dark {
+
+background: #111;
+
+color: var(--text-light);
+
+}
+
+/* =========================================================
+
+TOPBAR – VISIONOS STYLE
+
+========================================================== */
+
+.topbar {
+
+position: sticky;
+
+top: 0;
+
+backdrop-filter: var(--blur);
+
+background: var(--bg-light);
+
+border-bottom: 1px solid var(--border-light);
+
+padding: 14px 22px;
+
+display: flex;
+
+justify-content: space-between;
+
+align-items: center;
+
+z-index: 80;
+
+}
+
+body.dark .topbar {
+
+background: var(--bg-dark);
+
+border-color: var(--border-dark);
+
+}
+
+.topbar-left {
+
+display: flex;
+
+align-items: center;
+
+gap: 16px;
+
+}
+
+.topbar-title {
+
+font-size: 1.3rem;
+
+font-weight: 600;
+
+color: var(--text-dark);
+
+}
+
+body.dark .topbar-title {
+
+color: var(--text-light);
+
+}
+
+.topbar-actions {
+
+display: flex;
+
+gap: 10px;
+
+}
+
+.top-btn {
+
+padding: 8px 18px;
+
+font-size: 0.92rem;
+
+border-radius: 10px;
+
+border: 1px solid rgba(255,255,255,0.3);
+
+backdrop-filter: blur(10px);
+
+background: rgba(255,255,255,0.55);
+
+cursor: pointer;
+
+transition: 0.25s;
+
+}
+
+.top-btn:hover {
+
+background: rgba(255,255,255,0.75);
+
+}
+
+body.dark .top-btn {
+
+background: rgba(50,50,50,0.5);
+
+color: #eee;
+
+border: 1px solid rgba(255,255,255,0.08);
+
+}
+
+.top-btn.primary {
+
+background: var(--blue-apple);
+
+color: white;
+
+border-color: transparent;
+
+}
+
+.top-btn.primary:hover {
+
+background: #004be0;
+
+}
+
+.top-btn.danger {
+
+background: #d73636;
+
+color: white;
+
+border-color: transparent;
+
+}
+
+/* =========================================================
+
+CONTAINER + CARDS (VisionOS Glass)
+
+========================================================== */
+
+.container {
+
+max-width: 1100px;
+
+margin: 30px auto 70px auto;
+
+padding: 0 14px;
+
+}
+
+.section {
+
+padding: 24px 26px;
+
+margin-bottom: 26px;
+
+border-radius: var(--radius);
+
+backdrop-filter: var(--blur);
+
+background: var(--bg-light);
+
+border: 1px solid var(--border-light);
+
+box-shadow: var(--shadow);
+
+}
+
+body.dark .section {
+
+background: var(--bg-dark);
+
+border-color: var(--border-dark);
+
+}
+
+.section-title {
+
+font-size: 1.25rem;
+
+font-weight: 600;
+
+margin-bottom: 18px;
+
+color: var(--text-dark);
+
+}
+
+body.dark .section-title {
+
+color: var(--text-light);
+
+}
+
+.section-subtitle {
+
+margin-top: 8px;
+
+font-size: 1.05rem;
+
+font-weight: 500;
+
+margin-bottom: 10px;
+
+opacity: 0.85;
+
+}
+
+/* =========================================================
+
+GRID (VisionOS spacing)
+
+========================================================== */
+
+.grid {
+
+display: grid;
+
+grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+
+gap: 16px 22px;
+
+}
+
+.grid label {
+
+font-size: 0.92rem;
+
+display: flex;
+
+flex-direction: column;
+
+gap: 6px;
+
+}
+
+/* Inputs VisionOS */
+
+input, select, textarea {
+
+padding: 10px 12px;
+
+border-radius: 12px;
+
+border: 1px solid rgba(0,0,0,0.15);
+
+background: rgba(255,255,255,0.7);
+
+backdrop-filter: blur(10px);
+
+font-size: 0.92rem;
+
+}
+
+input:focus, select:focus, textarea:focus {
+
+border-color: var(--blue-apple);
+
+outline: none;
+
+}
+
+body.dark input,
+
+body.dark select,
+
+body.dark textarea {
+
+background: rgba(50,50,50,0.55);
+
+color: #ececec;
+
+border-color: rgba(255,255,255,0.1);
+
+}
+
+/* =========================================================
+
+TABLEAU DES PIÈCES – VisionOS
+
+========================================================== */
+
+table {
+
+width: 100%;
+
+border-collapse: collapse;
+
+border-radius: 12px;
+
+overflow: hidden;
+
+backdrop-filter: blur(10px);
+
+}
+
+thead {
+
+background: var(--blue-apple);
+
+color: white;
+
+}
+
+th, td {
+
+padding: 10px 12px;
+
+font-size: 0.95rem;
+
+}
+
+tbody tr {
+
+background: rgba(255,255,255,0.55);
+
+border-bottom: 1px solid rgba(0,0,0,0.08);
+
+}
+
+body.dark tbody tr {
+
+background: rgba(40,40,40,0.4);
+
+border-color: rgba(255,255,255,0.06);
+
+}
+
+.delete-piece {
+
+cursor: pointer;
+
+color: #d53a3a;
+
+font-size: 1.2rem;
+
+font-weight: bold;
+
+}
+
+.sortable-ghost {
+
+opacity: 0.5;
+
+background: rgba(255,0,0,0.15) !important;
+
+}
+
+/* =========================================================
+
+SIDEBAR HISTORIQUE – VisionOS Glass Panel
+
+========================================================== */
+
+.history-panel {
+
+position: fixed;
+
+top: 0;
+
+right: -360px;
+
+width: 340px;
+
+height: 100%;
+
+backdrop-filter: blur(28px);
+
+background: rgba(255,255,255,0.55);
+
+border-left: 1px solid var(--border-light);
+
+padding: 25px;
+
+transition: 0.3s ease;
+
+z-index: 200;
+
+}
+
+body.dark .history-panel {
+
+background: rgba(30,30,30,0.6);
+
+border-color: var(--border-dark);
+
+}
+
+.history-panel.open {
+
+right: 0;
+
+}
+
+.history-overlay {
+
+display: none;
+
+position: fixed;
+
+top: 0; left: 0;
+
+width: 100%; height: 100%;
+
+background: rgba(0,0,0,0.25);
+
+z-index: 120;
+
+}
+
+.history-overlay.active {
+
+display: block;
+
+}
+
+.history-item {
+
+padding: 12px 15px;
+
+background: rgba(255,255,255,0.45);
+
+border: 1px solid rgba(0,0,0,0.1);
+
+border-radius: 12px;
+
+margin-bottom: 12px;
+
+backdrop-filter: blur(12px);
+
+}
+
+body.dark .history-item {
+
+background: rgba(50,50,50,0.45);
+
+border-color: rgba(255,255,255,0.08);
+
+}
+
+/* Toast VisionOS */
+
+.toast {
+
+position: fixed;
+
+right: 20px;
+
+bottom: -70px;
+
+background: var(--blue-apple);
+
+color: white;
+
+padding: 12px 18px;
+
+border-radius: 12px;
+
+box-shadow: var(--shadow);
+
+transition: 0.35s;
+
+z-index: 300;
+
+font-size: 0.92rem;
+
+}
+
+.toast.show {
+
+bottom: 20px;
+
+}
+
+/* Responsive */
+
+@media (max-width: 700px) {
+
+.topbar {
+
+flex-direction: column;
+
+gap: 10px;
+
+}
+
+.topbar-actions {
+
+flex-wrap: wrap;
+
+justify-content: center;
+
+}
+
+.history-panel {
+
+width: 82%;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- ======== TOP BAR ======== -->
+
+<header class="topbar">
+
+<div class="topbar-left">
+
+<span class="topbar-title">Fiche Découverte Vendeur</span>
+
+</div>
+
+<div class="topbar-actions">
+
+<button id="modeToggle" class="top-btn">🌙 Mode sombre</button>
+
+<button id="newFicheBtn" class="top-btn">Nouvelle fiche</button>
+
+<button id="openHistoryBtn" class="top-btn">📁 Historique</button>
+
+<button id="saveBtn" class="top-btn primary">💾 Sauvegarder</button>
+
+<button id="pdfBtn" class="top-btn danger">📄 PDF</button>
+
+</div>
+
+</header>
+
+<!-- STATUS SAUVEGARDE -->
+
+<div id="saveStatus" style="padding:12px 22px; font-size:0.9rem; opacity:0.7;">
+
+Dernière sauvegarde : jamais
+
+</div>
+
+<!-- ======== PANEL HISTORIQUE ======== -->
+
+<div id="historyPanel" class="history-panel">
+
+<h2 style="margin-bottom:15px;">Fiches sauvegardées</h2>
+
+<input type="text" id="historySearch" placeholder="Rechercher..."
+
+style="width:100%; padding:10px; border-radius:10px; margin-bottom:20px;">
+
+<div id="historyList"></div>
+
+<button id="closeHistoryBtn" class="top-btn" style="margin-top:20px;">Fermer</button>
+
+</div>
+
+<div id="historyOverlay" class="history-overlay"></div>
+
+<!-- ======== CONTENU PRINCIPAL ======== -->
+
+<div class="container">
+
+<!-- SECTION 1 -->
+
+<section class="section">
+
+<div class="section-title">1. Identification & Contact</div>
+
+<div class="grid">
+
+<label>Vendeur
+
+<input type="text" id="vendeur">
+
+</label>
+
+<label>Téléphone
+
+<input type="text" id="tel_vendeur">
+
+</label>
+
+<label>Email
+
+<input type="email" id="mail_vendeur">
+
+</label>
+
+<label>Adresse du vendeur
+
+<input type="text" id="adresse_vendeur">
+
+</label>
+
+<label>Date du RDV
+
+<input type="date" id="date_rdv">
+
+</label>
+
+<label>Origine du contact
+
+<input type="text" id="origine">
+
+</label>
+
+</div>
+
+</section>
+
+<!-- SECTION 2 -->
+
+<section class="section">
+
+<div class="section-title">2. Caractéristiques du Bien</div>
+
+<div class="grid">
+
+<label>Adresse du bien
+
+<input type="text" id="adresse_bien">
+
+</label>
+
+<label>Année de construction
+
+<input type="number" id="annee_construction">
+
+</label>
+
+<label>Type de construction
+
+<input type="text" id="type_construction">
+
+</label>
+
+<label>Cadastre : section
+
+<input type="text" id="cadastre_section">
+
+</label>
+
+<label>Cadastre : numéro
+
+<input type="text" id="cadastre_numero">
+
+</label>
+
+<label>Couverture
+
+<input type="text" id="couverture">
+
+</label>
+
+<label>Mitoyenneté
+
+<input type="text" id="mitoyen">
+
+</label>
+
+</div>
+
+</section>
+
+<!-- SECTION 3 – DIAGNOSTICS -->
+
+<section class="section">
+
+<div class="section-title">3. Surfaces & Diagnostics</div>
+
+<div class="grid">
+
+<label>Surface Carrez (m²)
+
+<input type="number" id="surface_carrez">
+
+</label>
+
+<label>Surface habitable (m²)
+
+<input type="number" id="surface_habitable">
+
+</label>
+
+<label>Superficie parcelle (m²)
+
+<input type="number" id="superficie_parcelle">
+
+</label>
+
+</div>
+
+<div class="section-subtitle">Diagnostics techniques</div>
+
+<div class="grid">
+
+<label><input type="checkbox" id="diag_dpe"> DPE / GES</label>
+
+<label><input type="checkbox" id="diag_plomb"> Plomb (CREP)</label>
+
+<label><input type="checkbox" id="diag_amiante"> Amiante</label>
+
+<label><input type="checkbox" id="diag_termites"> Termites / Parasites</label>
+
+<label><input type="checkbox" id="diag_gaz"> Gaz</label>
+
+<label><input type="checkbox" id="diag_elec"> Électricité</label>
+
+<label><input type="checkbox" id="diag_assainissement"> Assainissement</label>
+
+<label><input type="checkbox" id="diag_erp"> ERP (Risques)</label>
+
+</div>
+
+<div class="grid" style="margin-top:15px;">
+
+<label>Diagnostiqueur
+
+<input type="text" id="diagnostiqueur" placeholder="Nom du diagnostiqueur">
+
+</label>
+
+</div>
+
+</section>
+
+<!-- SECTION 4 – TABLEAU DES PIÈCES -->
+
+<section class="section">
+
+<div class="section-title">4. Détail des pièces</div>
+
+<div style="display:flex; gap:12px; margin-bottom:15px;">
+
+<select id="piecesTemplate" class="top-btn" style="flex:1;">
+
+<option value="">Modèle de pièces...</option>
+
+<option value="maison">Maison</option>
+
+<option value="appartement">Appartement</option>
+
+<option value="t2">T2</option>
+
+<option value="t3">T3</option>
+
+<option value="t4">T4</option>
+
+<option value="vide">Tableau vide</option>
+
+</select>
+
+<button id="addPieceBtn" class="top-btn primary">➕ Ajouter</button>
+
+</div>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Pièce</th>
+
+<th>Surface</th>
+
+<th>Niveau</th>
+
+<th>Habitable</th>
+
+<th>Infos divers</th>
+
+<th></th>
+
+</tr>
+
+</thead>
+
+<tbody id="piecesTbody"></tbody>
+
+</table>
+
+<div style="margin-top:14px; font-weight:600;">
+
+Surface habitable totale :
+
+<span id="surfaceTotale">0</span> m²
+
+</div>
+
+</section>
+
+<!-- SECTION 5 – ÉQUIPEMENTS -->
+
+<section class="section">
+
+<div class="section-title">5. Équipements & Énergies</div>
+
+<div class="grid">
+
+<label>Mode de chauffage
+
+<select id="mode_chauffage">
+
+<option value="">Sélectionner</option>
+
+<option>Pompe à chaleur (PAC)</option>
+
+<option>Chaudière gaz</option>
+
+<option>Chaudière fioul</option>
+
+<option>Pellets / granulés</option>
+
+<option>Poêle à bois</option>
+
+<option>Convecteurs électriques</option>
+
+<option>Radiateurs à inertie</option>
+
+<option>Clim réversible</option>
+
+</select>
+
+</label>
+
+<label>Eau chaude
+
+<select id="eau_chaude">
+
+<option value="">Sélectionner</option>
+
+<option>Ballon électrique</option>
+
+<option>Ballon thermodynamique</option>
+
+<option>Chaudière gaz</option>
+
+<option>PAC (ECS intégrée)</option>
+
+<option>Cumulus instantané</option>
+
+</select>
+
+</label>
+
+<label>Énergie principale
+
+<select id="energie">
+
+<option value="">Sélectionner</option>
+
+<option>Électrique</option>
+
+<option>Gaz de ville</option>
+
+<option>Propane</option>
+
+<option>Fioul</option>
+
+<option>Bois</option>
+
+<option>Granulés</option>
+
+<option>Solaire</option>
+
+</select>
+
+</label>
+
+<label>Conso EDF/GDF (€/mois)
+
+<input type="text" id="conso_edf_gdf" placeholder="Ex : 120 € / mois">
+
+</label>
+
+<label>VMC
+
+<select id="vmc">
+
+<option value="">Sélectionner</option>
+
+<option>Simple flux</option>
+
+<option>Double flux</option>
+
+<option>Hygroréglable</option>
+
+<option>Aucune</option>
+
+</select>
+
+</label>
+
+<label>Ouvertures
+
+<select id="ouvertures">
+
+<option value="">Sélectionner</option>
+
+<option>PVC double vitrage</option>
+
+<option>Alu double vitrage</option>
+
+<option>Bois double vitrage</option>
+
+<option>Triple vitrage</option>
+
+<option>Mixte alu/bois</option>
+
+<option>Simple vitrage</option>
+
+</select>
+
+</label>
+
+</div>
+
+</section>
+
+<!-- SECTION 6 – SITUATION JURIDIQUE -->
+
+<section class="section">
+
+<div class="section-title">6. Situation Juridique & Financière</div>
+
+<div class="grid">
+
+<label>Taxe foncière
+
+<input type="text" id="taxe_fonciere">
+
+</label>
+
+<label>Charges copropriété
+
+<input type="text" id="charges_copro">
+
+</label>
+
+<label>Assainissement
+
+<input type="text" id="assainissement_type">
+
+</label>
+
+<label>Locataire
+
+<input type="text" id="locataire">
+
+</label>
+
+<label>Bail
+
+<input type="text" id="bail">
+
+</label>
+
+<label>Loyer
+
+<input type="text" id="loyer">
+
+</label>
+
+<label>Nombre lots copro
+
+<input type="number" id="nbr_lots_copro">
+
+</label>
+
+<label>Tantièmes
+
+<input type="text" id="tantiemes">
+
+</label>
+
+</div>
+
+</section>
+
+<!-- SECTION 7 – TRAVAUX -->
+
+<section class="section">
+
+<div class="section-title">7. Travaux & État général</div>
+
+<div class="grid">
+
+<label>État intérieur
+
+<select id="etat_interieur">
+
+<option value="">Sélectionner</option>
+
+<option>Neuf</option>
+
+<option>Très bon état</option>
+
+<option>Bon état</option>
+
+<option>Travaux légers</option>
+
+<option>Travaux importants</option>
+
+<option>Rénovation complète</option>
+
+</select>
+
+</label>
+
+<label>État extérieur
+
+<select id="etat_exterieur">
+
+<option value="">Sélectionner</option>
+
+<option>Neuf</option>
+
+<option>Très bon état</option>
+
+<option>Bon état</option>
+
+<option>Travaux légers</option>
+
+<option>Travaux importants</option>
+
+<option>Façade / toiture à refaire</option>
+
+</select>
+
+</label>
+
+<label>Norme
+
+<select id="norme">
+
+<option value="">Sélectionner</option>
+
+<option>BBC</option>
+
+<option>RT2012</option>
+
+<option>RE2020</option>
+
+<option>Autre</option>
+
+</select>
+
+</label>
+
+</div>
+
+</section>
+
+<!-- SECTION 8 – NOTES -->
+
+<section class="section">
+
+<div class="section-title">8. Notes & Informations complémentaires</div>
+
+<textarea id="notes" rows="6" placeholder="Notes..."></textarea>
+
+</section>
+
+</div> <!-- FIN CONTAINER -->
+
+<script>
+
+<!-- JS PRINCIPAL -->
+
+<script>
+
+/* =========================================================
+
+CONSTANTES
+
+========================================================= */
+
+const STORAGE_KEY = "declic_fiches_index";
+
+const FICHE_PREFIX = "fiche_";
+
+let currentFicheId = null;
+
+let autoSaveInterval = null;
+
+/* =========================================================
+
+INIT
+
+========================================================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+chargerDerniereFiche();
+
+activerActionsTopbar();
+
+activerHistorique();
+
+activerModeSombre();
+
+initialiserTableauPieces();
+
+lancerAutoSave();
+
+});
+
+/* =========================================================
+
+CREATION / REINITIALISATION
+
+========================================================= */
+
+function nouvelleFiche() {
+
+if (!confirm("Créer une nouvelle fiche ? Toutes les données non sauvegardées seront perdues.")) return;
+
+currentFicheId = genererIdFiche();
+
+viderFormulaire();
+
+viderPieces();
+
+mettreAJourIndex();
+
+afficherToast("Nouvelle fiche créée");
+
+}
+
+function chargerDerniereFiche() {
+
+const index = chargerIndex();
+
+if (index.length === 0) {
+
+currentFicheId = genererIdFiche();
+
+sauvegarderFiche();
+
+return;
+
+}
+
+const derniere = index[index.length - 1];
+
+currentFicheId = derniere.id;
+
+chargerFiche(currentFicheId);
+
+}
+
+function genererIdFiche() {
+
+return FICHE_PREFIX + Date.now();
+
+}
+
+function viderFormulaire() {
+
+document.querySelectorAll("input, textarea, select").forEach(el => {
+
+if (el.type === "checkbox") el.checked = false;
+
+else el.value = "";
+
+});
+
+}
+
+function viderPieces() {
+
+document.getElementById("piecesTbody").innerHTML = "";
+
+document.getElementById("surfaceTotale").textContent = "0";
+
+}
+
+/* =========================================================
+
+SAUVEGARDE / CHARGEMENT
+
+========================================================= */
+
+function sauvegarderFiche() {
+
+if (!currentFicheId) currentFicheId = genererIdFiche();
+
+const data = collecterDonnees();
+
+localStorage.setItem(currentFicheId, JSON.stringify(data));
+
+mettreAJourIndex(data);
+
+majIndicateurSauvegarde();
+
+}
+
+function lancerAutoSave() {
+
+autoSaveInterval = setInterval(() => sauvegarderFiche(), 8000);
+
+}
+
+function majIndicateurSauvegarde() {
+
+const el = document.getElementById("saveStatus");
+
+el.textContent = "Dernière sauvegarde : " + new Date().toLocaleTimeString("fr-FR");
+
+}
+
+function chargerFiche(id) {
+
+const raw = localStorage.getItem(id);
+
+if (!raw) return;
+
+const data = JSON.parse(raw);
+
+Object.keys(data.form).forEach(key => {
+
+const el = document.getElementById(key);
+
+if (!el) return;
+
+if (el.type === "checkbox") el.checked = data.form[key];
+
+else el.value = data.form[key];
+
+});
+
+viderPieces();
+
+data.pieces.forEach(p => ajouterLignePiece(p));
+
+currentFicheId = id;
+
+recalculerSurfaceTotale();
+
+afficherToast("Fiche chargée");
+
+}
+
+/* =========================================================
+
+COLLECTE DES DONNEES
+
+========================================================= */
+
+function collecterDonnees() {
+
+const form = {};
+
+document.querySelectorAll("input, textarea, select").forEach(el => {
+
+if (el.type === "checkbox") form[el.id] = el.checked;
+
+else form[el.id] = el.value || "";
+
+});
+
+const pieces = [];
+
+document.querySelectorAll("#piecesTbody tr").forEach(row => {
+
+pieces.push({
+
+name: row.querySelector(".p_name").value,
+
+surface: row.querySelector(".p_surface").value,
+
+niveau: row.querySelector(".p_niveau").value,
+
+hab: row.querySelector(".p_hab").checked,
+
+info: row.querySelector(".p_info").value
+
+});
+
+});
+
+const titre = `${form.vendeur || "Vendeur"} – ${form.adresse_bien || "Adresse inconnue"} – ${new Date().toLocaleDateString("fr-FR")}`;
+
+return {
+
+meta: { titre, dateModif: Date.now() },
+
+form,
+
+pieces
+
+};
+
+}
+
+/* =========================================================
+
+INDEX DES FICHES
+
+========================================================= */
+
+function chargerIndex() {
+
+return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+
+}
+
+function mettreAJourIndex(data = null) {
+
+let index = chargerIndex().filter(f => f.id !== currentFicheId);
+
+if (data) {
+
+index.push({
+
+id: currentFicheId,
+
+titre: data.meta.titre,
+
+dateModif: data.meta.dateModif
+
+});
+
+}
+
+index.sort((a, b) => a.dateModif - b.dateModif);
+
+localStorage.setItem(STORAGE_KEY, JSON.stringify(index));
+
+}
+
+/* =========================================================
+
+HISTORIQUE
+
+========================================================= */
+
+function activerHistorique() {
+
+document.getElementById("openHistoryBtn").onclick = ouvrirHistorique;
+
+document.getElementById("closeHistoryBtn").onclick = fermerHistorique;
+
+document.getElementById("historyOverlay").onclick = fermerHistorique;
+
+document.getElementById("historySearch").oninput = filtrerHistorique;
+
+chargerHistoriqueListe();
+
+}
+
+function ouvrirHistorique() {
+
+document.getElementById("historyPanel").classList.add("open");
+
+document.getElementById("historyOverlay").classList.add("active");
+
+chargerHistoriqueListe();
+
+}
+
+function fermerHistorique() {
+
+document.getElementById("historyPanel").classList.remove("open");
+
+document.getElementById("historyOverlay").classList.remove("active");
+
+}
+
+function chargerHistoriqueListe() {
+
+const index = chargerIndex();
+
+const container = document.getElementById("historyList");
+
+container.innerHTML = "";
+
+index.forEach(data => {
+
+const div = document.createElement("div");
+
+div.className = "history-item";
+
+div.innerHTML = `
+
+<div style="font-weight:600;">${data.titre}</div>
+
+<div style="font-size:0.85rem; opacity:0.7;">Modifié : ${new Date(data.dateModif).toLocaleString()}</div>
+
+<div style="margin-top:10px; display:flex; gap:6px;">
+
+<button class="top-btn primary" onclick="chargerFicheDepuisHistorique('${data.id}')">Charger</button>
+
+<button class="top-btn" onclick="renommerFiche('${data.id}')">Renommer</button>
+
+<button class="top-btn danger" onclick="supprimerFiche('${data.id}')">Supprimer</button>
+
+</div>`;
+
+container.appendChild(div);
+
+});
+
+}
+
+function filtrerHistorique() {
+
+const q = document.getElementById("historySearch").value.toLowerCase();
+
+document.querySelectorAll(".history-item").forEach(item => {
+
+item.style.display = item.textContent.toLowerCase().includes(q) ? "block" : "none";
+
+});
+
+}
+
+function chargerFicheDepuisHistorique(id) {
+
+chargerFiche(id);
+
+fermerHistorique();
+
+}
+
+function renommerFiche(id) {
+
+const index = chargerIndex();
+
+const fiche = index.find(f => f.id === id);
+
+const nv = prompt("Nouveau nom :", fiche.titre);
+
+if (!nv) return;
+
+fiche.titre = nv;
+
+localStorage.setItem(STORAGE_KEY, JSON.stringify(index));
+
+chargerHistoriqueListe();
+
+afficherToast("Nom mis à jour");
+
+}
+
+function supprimerFiche(id) {
+
+if (!confirm("Supprimer cette fiche ?")) return;
+
+const index = chargerIndex().filter(f => f.id !== id);
+
+localStorage.setItem(STORAGE_KEY, JSON.stringify(index));
+
+localStorage.removeItem(id);
+
+chargerHistoriqueListe();
+
+afficherToast("Fiche supprimée");
+
+}
+
+/* =========================================================
+
+MODE SOMBRE
+
+========================================================= */
+
+function activerModeSombre() {
+
+document.getElementById("modeToggle").onclick = () => {
+
+document.body.classList.toggle("dark");
+
+afficherToast("Mode visuel ajusté");
+
+};
+
+}
+
+</script>
+
+<!-- LIBRAIRIES EXTERNES -->
+
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+
+<!-- JS PIÈCES, MODELES, PDF -->
+
+<script>
+
+… (ta partie BLOC 4 ici, sans changement)
+
+</script>
+
+<script>
+
+/* =========================================================
+
+TABLEAU DES PIÈCES
+
+========================================================= */
+
+let sortable = null;
+
+function initialiserTableauPieces() {
+
+const tbody = document.getElementById("piecesTbody");
+
+sortable = new Sortable(tbody, {
+
+animation: 150,
+
+ghostClass: "sortable-ghost",
+
+onEnd: () => recalculerSurfaceTotale()
+
+});
+
+document.getElementById("addPieceBtn").onclick = () => {
+
+ajouterLignePiece();
+
+afficherToast("Pièce ajoutée");
+
+};
+
+document.getElementById("piecesTemplate").onchange = appliquerTemplatePieces;
+
+}
+
+/* -------------------------
+
+Ajouter une ligne de pièce
+
+------------------------- */
+
+function ajouterLignePiece(data = null) {
+
+const tbody = document.getElementById("piecesTbody");
+
+const tr = document.createElement("tr");
+
+tr.innerHTML = `
+
+<td><input class="p_name" type="text" value="${data?.name || ""}"></td>
+
+<td><input class="p_surface" type="number" value="${data?.surface || ""}" oninput="recalculerSurfaceTotale()"></td>
+
+<td><input class="p_niveau" type="text" value="${data?.niveau || ""}"></td>
+
+<td style="text-align:center;">
+
+<input class="p_hab" type="checkbox" ${data?.hab ? "checked" : ""}>
+
+</td>
+
+<td><input class="p_info" type="text" value="${data?.info || ""}"></td>
+
+<td style="text-align:center;">
+
+<span class="delete-piece" onclick="supprimerLignePiece(this)">✖</span>
+
+</td>
+
+`;
+
+tbody.appendChild(tr);
+
+}
+
+/* -------------------------
+
+Supprimer une pièce
+
+------------------------- */
+
+function supprimerLignePiece(el) {
+
+el.closest("tr").remove();
+
+recalculerSurfaceTotale();
+
+}
+
+/* -------------------------
+
+Recalcul de la surface totale habitable
+
+------------------------- */
+
+function recalculerSurfaceTotale() {
+
+let total = 0;
+
+document.querySelectorAll("#piecesTbody tr").forEach(row => {
+
+const surface = parseFloat(row.querySelector(".p_surface").value || 0);
+
+const hab = row.querySelector(".p_hab").checked;
+
+if (hab && !isNaN(surface)) {
+
+total += surface;
+
+}
+
+});
+
+document.getElementById("surfaceTotale").textContent = total.toFixed(2);
+
+}
+
+/* =========================================================
+
+MODÈLES DE PIÈCES
+
+========================================================= */
+
+const MODELES = {
+
+maison: [
+
+{ name: "Entrée", niveau: "RDC", hab: true },
+
+{ name: "Cuisine", niveau: "RDC", hab: true },
+
+{ name: "Salon", niveau: "RDC", hab: true },
+
+{ name: "Salle à manger", niveau: "RDC", hab: true },
+
+{ name: "Chambre 1", niveau: "RDC", hab: true },
+
+{ name: "Chambre 2", niveau: "RDC", hab: true },
+
+{ name: "Salle de bain", niveau: "RDC", hab: true }
+
+],
+
+appartement: [
+
+{ name: "Entrée", hab: true },
+
+{ name: "Séjour", hab: true },
+
+{ name: "Cuisine", hab: true },
+
+{ name: "Chambre", hab: true },
+
+{ name: "Salle d'eau", hab: true }
+
+],
+
+t2: [
+
+{ name: "Séjour", hab: true },
+
+{ name: "Cuisine", hab: true },
+
+{ name: "Chambre", hab: true },
+
+{ name: "Salle d'eau", hab: true }
+
+],
+
+t3: [
+
+{ name: "Séjour", hab: true },
+
+{ name: "Cuisine", hab: true },
+
+{ name: "Chambre 1", hab: true },
+
+{ name: "Chambre 2", hab: true },
+
+{ name: "Salle d'eau", hab: true }
+
+],
+
+t4: [
+
+{ name: "Séjour", hab: true },
+
+{ name: "Cuisine", hab: true },
+
+{ name: "Chambre 1", hab: true },
+
+{ name: "Chambre 2", hab: true },
+
+{ name: "Chambre 3", hab: true },
+
+{ name: "Salle d'eau", hab: true }
+
+],
+
+vide: []
+
+};
+
+function appliquerTemplatePieces() {
+
+const val = document.getElementById("piecesTemplate").value;
+
+if (!val) return;
+
+viderPieces();
+
+MODELES[val].forEach(p => ajouterLignePiece(p));
+
+recalculerSurfaceTotale();
+
+afficherToast("Modèle appliqué");
+
+}
+
+/* =========================================================
+
+TOP BAR ACTIONS
+
+========================================================= */
+
+function activerActionsTopbar() {
+
+document.getElementById("saveBtn").onclick = () => {
+
+sauvegarderFiche();
+
+afficherToast("Données sauvegardées");
+
+};
+
+document.getElementById("newFicheBtn").onclick = nouvelleFiche;
+
+document.getElementById("pdfBtn").onclick = exporterPDF;
+
+}
+
+/* =========================================================
+
+TOAST
+
+========================================================= */
+
+function afficherToast(message) {
+
+let toast = document.querySelector(".toast");
+
+if (!toast) {
+
+toast = document.createElement("div");
+
+toast.className = "toast";
+
+document.body.appendChild(toast);
+
+}
+
+toast.textContent = message;
+
+toast.classList.add("show");
+
+setTimeout(() => {
+
+toast.classList.remove("show");
+
+}, 2500);
+
+}
+
+/* =========================================================
+
+EXPORT PDF
+
+========================================================= */
+
+function exporterPDF() {
+
+const { jsPDF } = window.jspdf;
+
+const data = collecterDonnees();
+
+const doc = new jsPDF();
+
+let y = 15;
+
+doc.setFontSize(16);
+
+doc.text("FICHE DE DÉCOUVERTE VENDEUR", 105, y, { align: "center" });
+
+y += 8;
+
+doc.setFontSize(11);
+
+doc.text("Déclic Immo – Outil interne", 105, y, { align: "center" });
+
+y += 10;
+
+// Section 1 – Identification
+
+doc.setFontSize(12);
+
+doc.text("1. Identification", 10, y);
+
+y += 6;
+
+doc.setFontSize(10);
+
+doc.text(`Vendeur : ${data.form.vendeur || "-"}`, 10, y);
+
+doc.text(`Tél : ${data.form.tel_vendeur || "-"}`, 110, y);
+
+y += 6;
+
+doc.text(`Email : ${data.form.mail_vendeur || "-"}`, 10, y);
+
+doc.text(`Origine : ${data.form.origine || "-"}`, 110, y);
+
+y += 10;
+
+// Section 2 – Bien
+
+doc.setFontSize(12);
+
+doc.text("2. Bien Immobilier", 10, y);
+
+y += 6;
+
+doc.setFontSize(10);
+
+doc.text(`Adresse : ${data.form.adresse_bien || "-"}`, 10, y);
+
+y += 6;
+
+doc.text(`Année : ${data.form.annee_construction || "-"}`, 10, y);
+
+doc.text(`Type constr. : ${data.form.type_construction || "-"}`, 110, y);
+
+y += 10;
+
+// Section 3 – Surfaces
+
+doc.setFontSize(12);
+
+doc.text("3. Surfaces", 10, y);
+
+y += 6;
+
+doc.setFontSize(10);
+
+doc.text(`Carrez : ${data.form.surface_carrez || "-"} m²`, 10, y);
+
+doc.text(`Habitable : ${data.form.surface_habitable || "-"} m²`, 110, y);
+
+y += 6;
+
+doc.text(`Parcelle : ${data.form.superficie_parcelle || "-"} m²`, 10, y);
+
+y += 10;
+
+// Section 3 – Diagnostics (résumé)
+
+doc.setFontSize(12);
+
+doc.text("Diagnostics", 10, y);
+
+y += 6;
+
+doc.setFontSize(10);
+
+const diagLignes = [
+
+`DPE / GES : ${data.form.diag_dpe ? "Oui" : "Non"}`,
+
+`Plomb : ${data.form.diag_plomb ? "Oui" : "Non"}`,
+
+`Amiante : ${data.form.diag_amiante ? "Oui" : "Non"}`,
+
+`Termites / Parasites : ${data.form.diag_termites ? "Oui" : "Non"}`,
+
+`Gaz : ${data.form.diag_gaz ? "Oui" : "Non"}`,
+
+`Électricité : ${data.form.diag_elec ? "Oui" : "Non"}`,
+
+`Assainissement : ${data.form.diag_assainissement ? "Oui" : "Non"}`,
+
+`ERP : ${data.form.diag_erp ? "Oui" : "Non"}`,
+
+`Diagnostiqueur : ${data.form.diagnostiqueur || "-"}`,
+
+];
+
+diagLignes.forEach(l => {
+
+doc.text(l, 10, y);
+
+y += 5;
+
+if (y > 270) {
+
+doc.addPage();
+
+y = 15;
+
+}
+
+});
+
+y += 5;
+
+// Section 4 – Pièces (tableau)
+
+doc.setFontSize(12);
+
+doc.text("4. Détail des pièces", 10, y);
+
+y += 4;
+
+const tableauPieces = data.pieces.map(p => [
+
+p.name || "-",
+
+(p.surface ? p.surface + " m²" : "-"),
+
+p.niveau || "-",
+
+p.hab ? "Oui" : "Non",
+
+p.info || "-"
+
+]);
+
+doc.autoTable({
+
+startY: y,
+
+head: [["Pièce", "Surface", "Niveau", "Habitable", "Infos"]],
+
+body: tableauPieces,
+
+theme: "grid",
+
+headStyles: { fillColor: [10, 92, 255] },
+
+styles: { fontSize: 9 }
+
+});
+
+y = doc.lastAutoTable.finalY + 10;
+
+// Section 8 – Notes
+
+if (y > 260) {
+
+doc.addPage();
+
+y = 15;
+
+}
+
+doc.setFontSize(12);
+
+doc.text("Notes", 10, y);
+
+y += 6;
+
+doc.setFontSize(10);
+
+const notes = doc.splitTextToSize(data.form.notes || "(Aucune note)", 180);
+
+doc.text(notes, 10, y);
+
+doc.save(data.meta.titre + ".pdf");
+
+afficherToast("PDF exporté");
+
+}
+
+</script>
+
+</body>
+
+</html>
+
+Nov 26, 09:20 AM
+
+Copy
+Scroll to bottom
+Agent is waiting...
+Message Agent
+Attach
+GitHub
+Save to GitHub
+Fork
+Fork
+
+Ultra
+
+
+
+send
+App Preview
+Share app
+Share
+
+Open in new tab
+Close
+
